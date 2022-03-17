@@ -1,8 +1,8 @@
 # Fire
 
-Transfers files via SFTP from working directory to NFORS
+Transfers files via SFTP from working directory to Example
 
-Copies files to a separate working directory for ALASTAR project (This is a handoff point to applications team).
+Copies files to a separate working directory for Example project (This is a handoff point to applications team).
 
 Keeps a database of what files have been transferred and copied respectively.
 
