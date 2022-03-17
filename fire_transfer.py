@@ -39,7 +39,7 @@ cursor = mariadb_connection.cursor()
 # Queries
 transfer_completed_query = "SELECT file_name FROM transactions WHERE transfer_completed = 'no';"
 transfer_completed_update = "UPDATE transactions SET transfer_completed = 'yes' WHERE file_name = %s"
-copy_completed_update = "UPDATE transactions SET alastar_copied = 'yes' WHERE file_name = %s"
+copy_completed_update = "UPDATE transactions SET example_copied = 'yes' WHERE file_name = %s"
 cursor.execute(transfer_completed_query);
 result = cursor.fetchall();
 
@@ -66,7 +66,7 @@ def transmit():
 	mariadb_connection.commit()
 
 def copy():
-	"Copies the files to the applications team for Alastar processing"
+	"Copies the files to the applications team for Example processing"
 	os.system("cp /mnt/fire/" + i + " /mnt/ati/" + i)
 	copied_List.append(i)
 	cursor.execute(copy_completed_update, j)
