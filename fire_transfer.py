@@ -29,8 +29,8 @@ host,port = "example.example.com",22
 transport = paramiko.Transport((host,port))
 
 # Paths
-local_path = '/mnt/fire/'
-remote_path = '/memphisTN/'
+local_path = '/mnt/example/'
+remote_path = '/example/'
 
 # Open database connection
 mariadb_connection = mariadb.connect(user='example', password='ThisIsBadIknow', database='example')
@@ -67,7 +67,7 @@ def transmit():
 
 def copy():
 	"Copies the files to the applications team for Example processing"
-	os.system("cp /mnt/fire/" + i + " /mnt/ati/" + i)
+	os.system("cp /mnt/example/" + i + " /mnt/ati/" + i)
 	copied_List.append(i)
 	cursor.execute(copy_completed_update, j)
 	mariadb_connection.commit()
@@ -100,8 +100,8 @@ if len(transfer_List) >= 1:
 			except IOError, ioerr:
 				print("I/O error({0}): {1}".format(ioerr.errno, ioerr.strerror))
 				print(i + ": Transmit Errored out")
-				os.system("mv /mnt/fire/" + i + " /storage/fire/errors/" + i)
-				print("Moved error file " + i + " to /storage/fire/errors/")
+				os.system("mv /mnt/example/" + i + " /storage/example/errors/" + i)
+				print("Moved error file " + i + " to /storage/example/errors/")
 				pass
 			except paramiko.ssh_exception as para_ssh:
 				print("Transport SSH Error on this File")
@@ -114,10 +114,10 @@ if len(transfer_List) >= 1:
 	transport.close()
 	mariadb_connection.close()
 
-# Reads variables from /scripts/fire/variable_file.txt to keep track of numbers for email notifications
+# Reads variables from /scripts/example/variable_file.txt to keep track of numbers for email notifications
 variables = {}
 
-with open("/scripts/fire/variable_file.txt") as file:
+with open("/scripts/example/variable_file.txt") as file:
         for line in file:
                 name, value = line.split("=")
                 variables[name] = int(value)
@@ -127,7 +127,7 @@ copied1 = variables["copied_files"]
 print("Sent value from file = " + str(sent1)) #printed for logs
 print("Copied value from file = " + str(copied1)) #printed for logs
 
-# Updates variables in /scripts/fire/variable_file.txt
+# Updates variables in /scripts/example/variable_file.txt
 sent2 = sent1 + len(transmit_list)
 copied2 = copied1 + len(copied_List)
 print("Sent = " + str(sent2)) #printed for logs
@@ -137,7 +137,7 @@ if len(transfer_List) >= 1:
         try:
                	os.system("echo > variable_file.txt")
 		data = """sent_files={sent}\ncopied_files={copied}\n""".format(sent=str(sent2), copied=str(copied2))
-		variable_file = open("/scripts/fire/variable_file.txt", "rw+")
+		variable_file = open("/scripts/example/variable_file.txt", "rw+")
                	variable_file.writelines(data)
                 variable_file.close()
         except:
