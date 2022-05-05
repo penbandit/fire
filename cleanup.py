@@ -37,15 +37,15 @@ for i in out:
 	copied_List.append(i)
 
 # Source and Target Directories
-source_Directory = "/mnt/fire/"
-target_Directory = "/storage/fire/fire_archive.zip"
+source_Directory = "/mnt/example/"
+target_Directory = "/storage/example/example_archive.zip"
 
 def archive():
     "Zips the file into the target directory archive and removes the original"
-    #os.system("zip " + target_Directory + " " + source_Directory + i)
+    os.system("zip " + target_Directory + " " + source_Directory + i)
     os.remove(source_Directory + i)
     #print("zipped " + target_Directory + " " + source_Directory + i)
-    print("Deleted:  " + source_Directory + i)
+    #print("Deleted:  " + source_Directory + i)
 
 if len(copied_List) >= 1:
     for i in copied_List:
